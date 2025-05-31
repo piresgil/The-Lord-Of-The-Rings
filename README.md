@@ -2,7 +2,7 @@
 
 ![Bibliotecas](https://img.shields.io/badge/Libraries-Maven%2C%20Javafx)
  
-![Status](https://img.shields.io/badge/status-estável-brightgreen))
+![Status](https://img.shields.io/badge/status-estável-brightgreen)
 
 @author Daniel Gil
 
