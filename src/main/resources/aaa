@@ -1,0 +1,66 @@
+/* popup.css */
+.popup-background {
+    -fx-background-color: #f2f2f2;
+    -fx-padding: 20px;
+}
+
+.popup-header {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.popup-message {
+    -fx-font-size: 14px;
+    -fx-text-fill: #7f8c8d;
+}
+
+.popup-button-ok {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-padding: 10px;
+}
+
+.popup-button-cancel {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-padding: 10px;
+}
+
+
+/* Estilizando o título */
+.label {
+    font-size: 18px;   /* Tamanho do título */
+    font-weight: bold; /* Peso do título */
+    color: #2a9d8f;    /* Cor do título */
+    text-align: center; /* Alinha o título ao centro */
+}
+
+/* Estilizando o conteúdo */
+.vbox {
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+}
+
+/* Estilizando os botões */
+.button {
+    -fx-background-color: #2a9d8f;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+.button:hover {
+    -fx-background-color: #1e7a5f;
+}
+.dialog-pane .header-text {
+    font-size: 20px;  /* Define o tamanho da fonte do título */
+    font-weight: bold; /* Define o peso da fonte */
+    color: #2a9d8f;  /* Define a cor do título */
+    text-align: center;  /* Alinha o título ao centro */
+}
+#confirmationTitle {
+    font-size: 20px;  /* Define o tamanho da fonte */
+    font-weight: bold; /* Define o peso da fonte */
+    color: #2a9d8f;  /* Cor do texto */
+    text-align: center;  /* Alinha o texto ao centro */
+}

@@ -1,0 +1,148 @@
+/* ========== ESTILOS GERAIS ========== */
+.main-listview {
+    -fx-border-color: blue;
+}
+
+.list-cell.custom-cell {
+    -fx-font-family: "Comic Sans MS";
+    -fx-font-size: 12px;
+    -fx-text-fill: blue;
+}
+
+.list-cell.custom-cell:selected {
+    -fx-background-color: cyan;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+/* ========== ESTILOS DE POPUP ========== */
+.popup-vbox {
+    -fx-padding: 10px;
+    -fx-background-color: #e6f3ff; /* Azul claro de fundo */
+}
+
+.popup-header {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.popup-message {
+    -fx-font-size: 12px;
+    -fx-text-fill: #7f8c8d;
+}
+
+.popup-button-ok {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+}
+
+.popup-button-cancel {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+}
+
+.popup-background {
+    -fx-background-color: #f2f2f2; /* branco cinza */
+    -fx-padding: 10px;
+}
+
+
+/* ========== ESTILOS DE BATALHA ========== */
+.battle {
+    -fx-background-color: lightblue;
+}
+
+.battle-log {
+    -fx-font-family: "Comic Sans MS";
+}
+
+/* ========== ESTILOS DO LOG DE BATALHA ========== */
+/* Linha completa que contém TURNO */
+.battle-log-turn-line {
+    /* -fx-background-color: #e6f3ff; Azul claro de fundo */
+    -fx-text-alignment: center; /* Alinha o texto dentro dos nodes Text */
+}
+
+/* Estilos para palavras específicas */
+.battle-log-turn-word {
+    -fx-fill: blue;
+    -fx-font-weight: bold
+}
+
+.battle-log-buff-line {
+    -fx-background-color: #e6f3ff; /* Azul claro de fundo */
+    -fx-text-alignment: right; /* Alinha o texto dentro dos nodes Text */
+}
+/* Linha completa que contém BUFF */
+.battle-log-buff-word {
+    -fx-fill: 	#7B68EE; /* purple */
+     -fx-font-weight: bold;
+    /* -fx-text-alignment: right;  Alinha o texto dentro dos nodes Text */
+}
+
+/* Linha completa que contém DERROTADO */
+.battle-log-derrotado-line {
+    -fx-background-color: #f7eeee; /* red claro de fundo */
+    -fx-text-alignment: right; /* Alinha o texto dentro dos nodes Text */
+}
+/* Linha completa que contém DERROTADO */
+ .battle-log-derrotado-word {
+     -fx-fill: #FF0000; /*RED*/
+      -fx-font-weight: bold;
+     /* -fx-text-alignment: right;  Alinha o texto dentro dos nodes Text */
+ }
+
+
+
+.battle-log-vencedor-word {
+    -fx-fill: gold;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+     -fx-font-weight: bold;
+}
+
+.battle-log-dano-word {
+-fx-fill: #8B0000; /*Dark Red*/
+    -fx-font-weight: bold;
+}
+
+.battle-log-vida-word {
+    -fx-fill: #00FF00; /*Lime*/
+    -fx-font-weight: bold;
+}
+
+.battle-log-defesa-word {
+    -fx-fill: 	#689bee; /* azul claro (purple) */
+    -fx-font-weight: bold;
+}
+
+.battle-log-sofreu-word {
+  -fx-fill: #8B0000; /*Dark Red*/
+    -fx-font-weight: bold;
+}
+
+.battle-log-ganhou-word {
+    -fx-fill: green;
+    -fx-font-weight: bold;
+}
+
+.battle-log-terramoto-word {
+    -fx-fill: #8B0000; /*Dark Red*/
+    -fx-font-weight: bold;
+}
+
+.battle-log-bencao-word {
+    -fx-fill: #00FF00; /*Lime*/
+    -fx-font-weight: bold;
+}
+
+.battle-log-defesa-word {
+    -fx-fill: 	#689bee; /* azul claro (purple) */
+    -fx-font-weight: bold;
+}
+
+.battle-log-chuva-word {
+    -fx-fill: 	#689bee; /* azul claro (purple) */
+    -fx-font-weight: bold;
+}
