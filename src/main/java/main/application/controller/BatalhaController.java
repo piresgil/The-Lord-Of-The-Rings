@@ -195,6 +195,8 @@ public class BatalhaController extends StackPane {
         // Lógica de Fim de batalha
         Platform.runLater(() -> {
             finalizarBatalha();
+            // Verifica se há heróis ou bestas em excesso e os remove
+            ajustarExercitos();
             if (onFinish != null) {
                 onFinish.run();
             }
@@ -281,10 +283,6 @@ public class BatalhaController extends StackPane {
         bestas.setAll(bestasAtivas);
         System.out.println("Herois: " + herois.size());
         System.out.println("Bestas: " + bestas.size());
-
-        // Verifica se há heróis ou bestas em excesso e os remove
-        ajustarExercitos();
-
     }
 
     // Ajusta listas (Heróis e bestas), garante que as listas de exércitos tenham sempre o mesmo numero de personagens
