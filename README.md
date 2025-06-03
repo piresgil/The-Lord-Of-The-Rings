@@ -9,5 +9,7 @@
 Pequena implementação de um jogo de batalhas de exercito, base turnos, onde foram aplicados conceitos OOP, em Maven, utilização de Javafx para UI, Json para guardar a base de dados dos Personagens, podendo assim criar, remover e alterar personagens.
 
 
-
+<p align="center">
+  <img src="src/Sreenshots/rings.gif" alt="MainAOO" />
+</p>
 
