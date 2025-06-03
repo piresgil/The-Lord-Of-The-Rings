@@ -4,6 +4,7 @@ import main.application.model.Besta;
 import main.application.model.Heroi;
 import main.application.model.Personagem;
 import main.application.repository.PersonagemJsonRepository;
+import main.application.utils.JsonUtils;
 
 import java.util.*;
 
@@ -52,63 +53,67 @@ public class PersonagemManager {
     }
 
     // Salvar Heróis
-    public void salvarHerois(List<Heroi> listaPersonagens) {
-        this.listaHerois = listaPersonagens;
-        PersonagemJsonRepository.salvarHerois(listaPersonagens);  // Salva em herois.json
+    public void salvarHerois() {
+        PersonagemJsonRepository.salvarHerois(this.listaHerois);
     }
 
     // Salvar Bestas
-    public void salvarBestas(List<Besta> listaPersonagens) {
-        this.listaBestas = listaPersonagens;
-        PersonagemJsonRepository.salvarBestas(listaPersonagens); // Salva em bestas.json
+    public void salvarBestas() {
+        PersonagemJsonRepository.salvarBestas(this.listaBestas);
     }
 
     // adicionar novo Herói
     public void adicionarHeroi(Heroi heroi) {
         listaHerois.add(heroi);
         cache.put(heroi.getId(), heroi);
-        salvarHerois(listaHerois);
+        salvarHerois();
     }
 
     // adicionar nova Besta
     public void adicionarBesta(Besta besta) {
         listaBestas.add(besta);
         cache.put(besta.getId(), besta);
-        salvarBestas(listaBestas);
+        salvarBestas();
     }
 
     // Editar Herói
-    public void atualizarHeroi(Heroi heroi) {
+    public void atualizarHeroi(Heroi heroiAtualizado) {
         for (int i = 0; i < listaHerois.size(); i++) {
-            if (listaHerois.get(i).getId().equals(heroi.getId())) {
-                listaHerois.set(i, heroi);
-                cache.put(heroi.getId(), heroi);
+            if (listaHerois.get(i).getId().equals(heroiAtualizado.getId())) {
+                listaHerois.set(i, heroiAtualizado);
                 return;
             }
         }
+        System.out.println("Herói não encontrado para atualizar.");
     }
 
     // Editar Besta
-    public void atualizarBesta(Besta besta) {
+    public void atualizarBesta(Besta bestaAtualizada) {
         for (int i = 0; i < listaBestas.size(); i++) {
-            if (listaBestas.get(i).getId().equals(besta.getId())) {
-                listaBestas.set(i, besta);
-                cache.put(besta.getId(), besta);
+            if (listaBestas.get(i).getId().equals(bestaAtualizada.getId())) {
+                listaBestas.set(i, bestaAtualizada);
                 return;
             }
         }
+        System.out.println("Herói não encontrado para atualizar.");
     }
 
     // Remover Herói
     public void removerHeroi(String id) {
-        listaHerois.removeIf(heroi -> heroi.getId().equals(id));
-        cache.remove(id);
+        boolean removido = listaHerois.removeIf(heroi -> heroi.getId().equals(id));
+        if (removido) {
+            cache.remove(id);
+            salvarHerois();
+        }
     }
 
     // Remover Besta
     public void removerBesta(String id) {
-        listaBestas.removeIf(besta -> besta.getId().equals(id));
-        cache.remove(id);
+        boolean removido = listaBestas.removeIf(besta -> besta.getId().equals(id));
+        if (removido) {
+            cache.remove(id);
+            salvarBestas();
+        }
     }
 
     // salva todas as listas (Heróis e Bestas)

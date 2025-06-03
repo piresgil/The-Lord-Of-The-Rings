@@ -1,5 +1,6 @@
 package main.application.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import main.application.model.enums.Tipo;
 
@@ -11,6 +12,7 @@ public class Heroi extends Personagem {
         super();
     }
 
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
     public Heroi(@JsonProperty("id") String id,  // Pode permitir um id vindo do JSON
                  @JsonProperty("tipo") Tipo tipo,
                  @JsonProperty("nome") String nome,

@@ -313,7 +313,7 @@ public class BatalhaController extends StackPane {
     // verifica se a batalha finalizou, analisando as listas de heróis e bestas
     private void finalizarBatalha() {
         System.out.println("Finalizar batalha");
-        String vencedor = herois.isEmpty() ? "Bestas Venceram!" : "Heróis  Venceram!";
+        String vencedor = herois.isEmpty() ? "Bestas Venceram!" : "Heróis Venceram!";
 
         adicionarLinhaLog(logBatalha, ("\n" + vencedor));
 

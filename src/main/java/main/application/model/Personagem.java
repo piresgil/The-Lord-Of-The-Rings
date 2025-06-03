@@ -26,19 +26,19 @@ public abstract class Personagem {
     @NotNull(message = "O ataque é obrigatório.")
     private Integer ataque;
 
-    @JsonCreator
     public Personagem() {
 
     }
 
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
     public Personagem(@JsonProperty("id") String id,  // Pode permitir um id vindo do JSON
                       @JsonProperty("tipo") Tipo tipo,
                       @JsonProperty("nome") String nome,
                       @JsonProperty("vida") Integer vida,
                       @JsonProperty("armadura") Integer armadura,
                       @JsonProperty("ataque") Integer ataque) {
-        this.id =  UUID.randomUUID().toString();
+
+        this.id = (id == null || id.isEmpty()) ? UUID.randomUUID().toString() : id;
 
         this.tipo = tipo;
         this.nome = nome;

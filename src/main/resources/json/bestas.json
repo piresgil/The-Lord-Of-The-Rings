@@ -1,36 +1,8 @@
 [ {
-  "id" : "87def5f6-b376-4dd6-8476-f16e9527b8d0",
-  "tipo" : "ORQUES",
-  "nome" : "Lurtz",
-  "vida" : 200,
-  "armadura" : 60,
-  "ataque" : 10
-}, {
-  "id" : "e73333c4-c533-4e28-a797-2cb6f0526934",
-  "tipo" : "ORQUES",
-  "nome" : "Shagrat",
-  "vida" : 220,
-  "armadura" : 50,
-  "ataque" : 10
-}, {
-  "id" : "0aa481bc-a558-402a-8050-0fa05b28477e",
-  "tipo" : "ORQUES",
-  "nome" : "Gothmog",
-  "vida" : 120,
-  "armadura" : 40,
-  "ataque" : 10
-}, {
-  "id" : "4ab4e0c4-e8ab-490a-8470-831915a6f81c",
-  "tipo" : "ORQUES",
+  "id" : "1b2c4d27-ef3d-40b9-a66b-08dff8ab6755",
+  "tipo" : "TROLLS",
   "nome" : "BBB",
-  "vida" : 1000,
-  "armadura" : 50,
-  "ataque" : 1000
-}, {
-  "id" : null,
-  "tipo" : "DRAGOES",
-  "nome" : "CBA",
-  "vida" : 2000,
-  "armadura" : 100,
-  "ataque" : 2000
+  "vida" : 1,
+  "armadura" : 1,
+  "ataque" : 1
 } ]

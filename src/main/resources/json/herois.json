@@ -1,36 +1,8 @@
 [ {
-  "id" : "cc325dd8-5648-468d-ad6c-c6d7139a56fa",
-  "tipo" : "ELFO",
-  "nome" : "Legolas",
-  "vida" : 150,
-  "armadura" : 30,
-  "ataque" : 10
-}, {
-  "id" : "ea284c04-2f92-493c-bcea-4feb91d12278",
-  "tipo" : "ELFO",
-  "nome" : "Glorfindel",
-  "vida" : 160,
-  "armadura" : 55,
-  "ataque" : 10
-}, {
-  "id" : "d814e832-a4b7-4794-83d8-80efd1dcc894",
-  "tipo" : "ELFO",
-  "nome" : "Haldir",
-  "vida" : 155,
-  "armadura" : 53,
-  "ataque" : 10
-}, {
-  "id" : "e808d412-8de6-4a6d-b443-73cf1d18b96b",
-  "tipo" : "ELFO",
+  "id" : "b0a270b5-197f-4f4e-8c37-4fa46e692691",
+  "tipo" : "MAGO",
   "nome" : "AAA",
-  "vida" : 1000,
-  "armadura" : 50,
-  "ataque" : 1000
-}, {
-  "id" : null,
-  "tipo" : "HOBBIT",
-  "nome" : "ABC",
-  "vida" : 2000,
-  "armadura" : 100,
-  "ataque" : 2000
+  "vida" : 1,
+  "armadura" : 1,
+  "ataque" : 1
 } ]

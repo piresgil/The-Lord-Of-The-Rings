@@ -6,7 +6,6 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import main.application.listener.AtualizarJsonListener;
 import main.application.model.Besta;
 import main.application.model.Heroi;
-import main.application.model.Personagem;
 import main.application.resources.BaseDadosOriginal;
 
 import java.io.File;
@@ -17,14 +16,18 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Cass Util para manipular os JSON
  */
 public class JsonUtils {
     // Object Mapper - facilita a conversão entre objetos de programação (como objetos Java) e outros formatos de dados, como JSON ou XML
-    private static final ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
+    private static final ObjectMapper mapper = new ObjectMapper();
+
+    static {
+        mapper.registerModule(new JavaTimeModule());
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+    }
 
     // Caminhos para os arquivos JSON
     private static final String JSON_DIR = "src/main/resources/json";  // Diretório onde os arquivos JSON serão salvos
@@ -100,22 +103,21 @@ public class JsonUtils {
         }
     }
 
-    // Salvar lista de personagens em um arquivo JSON (pode ser heróis ou bestas)
-    private static void salvarHerois(List<Heroi> listaPersonagens, Path filePath) {
+    /**
+     * Metodo genérico para salvar uma lista de personagens em um arquivo JSON.
+     * @param listaPersonagens Lista de personagens (pode ser de qualquer tipo).
+     * @param filePath Caminho do arquivo onde será salvo o JSON.
+     */
+    private static <T> void salvarPersonagens(List<T> listaPersonagens, Path filePath) {
         try {
-            // Criar diretório pai se não existir
             File diretorioPai = filePath.toFile().getParentFile();
             if (diretorioPai != null) {
                 diretorioPai.mkdirs();
             }
 
-            // Configurar o ObjectMapper para JSON formatado
-            mapper.registerModule(new JavaTimeModule()); // Caso use LocalDate/LocalDateTime
-
-            // Escrever no arquivo
+            mapper.registerModule(new JavaTimeModule());
             mapper.writeValue(filePath.toFile(), listaPersonagens);
 
-            // Feedback de sucesso
             System.out.printf("Personagens salvos com sucesso em: %s%n", filePath.toAbsolutePath().normalize());
 
         } catch (IOException e) {
@@ -124,28 +126,24 @@ public class JsonUtils {
         }
     }
 
-    // Salvar lista de personagens em um arquivo JSON (pode ser heróis ou bestas)
-    private static void salvarBestas(List<Besta> listaPersonagens, Path filePath) {
-        try {
-            // Criar diretório pai se não existir
-            File diretorioPai = filePath.toFile().getParentFile();
-            if (diretorioPai != null) {
-                diretorioPai.mkdirs();
-            }
+    /**
+     * Metodo específico para salvar a lista de heróis em arquivo JSON.
+     * Chama o metodo genérico salvarPersonagens.
+     * @param herois Lista de objetos Heroi.
+     * @param filePath Caminho do arquivo JSON para salvar os heróis.
+     */
+    private static void salvarHerois(List<Heroi> herois, Path filePath) {
+        salvarPersonagens(herois, filePath);
+    }
 
-            // Configurar o ObjectMapper para JSON formatado
-            mapper.registerModule(new JavaTimeModule()); // Caso use LocalDate/LocalDateTime
-
-            // Escrever no arquivo
-            mapper.writeValue(filePath.toFile(), listaPersonagens);
-
-            // Feedback de sucesso
-            System.out.printf("Personagens salvos com sucesso em: %s%n", filePath.toAbsolutePath().normalize());
-
-        } catch (IOException e) {
-            System.err.printf("ERRO ao salvar personagens em %s: %s%n", filePath.toAbsolutePath(), e.getMessage());
-            throw new RuntimeException("Falha ao persistir personagens", e);
-        }
+    /**
+     * Metodo específico para salvar a lista de bestas em arquivo JSON.
+     * Chama o metodo genérico salvarPersonagens.
+     * @param bestas Lista de objetos Besta.
+     * @param filePath Caminho do arquivo JSON para salvar as bestas.
+     */
+    private static void salvarBestas(List<Besta> bestas, Path filePath) {
+        salvarPersonagens(bestas, filePath);
     }
 
     // Carregar a lista de Heróis a partir do JSON
@@ -182,25 +180,23 @@ public class JsonUtils {
         }
     }
 
+    private static <T> void updatePersonagens(List<T> personagens, Path filePath, String tipo) {
+        if (personagens.isEmpty()) {
+            System.out.println("Não há " + tipo + " para salvar. Lista está vazia.");
+        } else {
+            System.out.println("Salvando " + personagens.size() + " " + tipo + ".");
+            salvarPersonagens(personagens, filePath);
+            System.out.println("Json salvo com sucesso.");
+        }
+    }
     // Salvar as alterações feitas na lista de heróis no arquivo JSON
     public static void updateHerois(List<Heroi> heroisAlterados) {
-        if (heroisAlterados.isEmpty()) {
-            System.out.println("Não há heróis para salvar. Lista está vazia.");
-        } else {
-            System.out.println("Salvando " + heroisAlterados.size() + " heróis.");
-            salvarHerois(heroisAlterados, HEROIS_PATH);  // Chama o método de salvar passando a lista alterada e o caminho do arquivo
-            System.out.println("Json " + HEROIS_FILE + " salvo com sucesso.");
-        }
+        updatePersonagens(heroisAlterados, HEROIS_PATH, "heróis");
     }
 
     // Salvar as alterações feitas na lista de bestas no arquivo JSON
     public static void updateBestas(List<Besta> bestasAlteradas) {
-        if (bestasAlteradas.isEmpty()) {
-            System.out.println("Não há bestas para salvar. Lista está vazia.");
-        } else {
-            System.out.println("Salvando " + bestasAlteradas.size() + " bestas.");
-            salvarBestas(bestasAlteradas, BESTAS_PATH);  // Chama o método de salvar passando a lista alterada e o caminho do arquivo
-            System.out.println("Json " + BESTAS_FILE + " salvo com sucesso.");
-        }
+        updatePersonagens(bestasAlteradas, BESTAS_PATH, "bestas");
     }
+
 }

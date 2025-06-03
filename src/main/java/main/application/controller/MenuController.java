@@ -27,6 +27,7 @@ import main.application.utils.ValidationUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -123,14 +124,14 @@ public class MenuController implements AtualizarJsonListener {
         btnGravarPersonagem1.setOnAction(actionEvent -> {
             // Cria uma nova instância de Heroi
             Personagem heroi = new Heroi();
-            gravarPersonagem(heroi, observableListHerois, listViewHerois);
+            gravarPersonagem(listViewHerois);
         });
 
         // Para o botão que gravar o Besta
         btnGravarPersonagem2.setOnAction(actionEvent -> {
             // Cria uma nova instância de Heroi
             Personagem besta = new Besta();
-            gravarPersonagem(besta, observableListBestas, listViewBestas);
+            gravarPersonagem(listViewBestas);
         });
 
         // para botões que alteram a posição (para Cima e para baixo) dos personagens da lista de heróis
@@ -310,6 +311,11 @@ public class MenuController implements AtualizarJsonListener {
                 personagem.setArmadura(armadura);
                 personagem.setAtaque(ataque);
 
+                // Garante que o ID está definido
+                if (personagem.getId() == null || personagem.getId().isEmpty()) {
+                    personagem.setId(UUID.randomUUID().toString());
+                }
+
                 // Adiciona personagem no Json
                 manager.adicionarHeroi((Heroi) personagem);
 
@@ -326,6 +332,11 @@ public class MenuController implements AtualizarJsonListener {
                 personagem.setVida(vida);
                 personagem.setArmadura(armadura);
                 personagem.setAtaque(ataque);
+
+                // Garante que o ID está definido
+                if (personagem.getId() == null || personagem.getId().isEmpty()) {
+                    personagem.setId(UUID.randomUUID().toString());
+                }
 
                 // Adiciona personagem no Json
                 manager.adicionarBesta((Besta) personagem);
@@ -345,6 +356,9 @@ public class MenuController implements AtualizarJsonListener {
 
             // Exibe mensagem de sucesso
             PopupUtils.showSuccessPopup("Sucesso", "Personagem " + personagem.getNome() + " adicionado com sucesso!", getRoot());
+
+            // cancela edição
+            cancelarEdicao();
 
         } catch (NumberFormatException e) {
             PopupUtils.showErrorPopup("Error", "Vida, Armadura e ataque tem que ser inteiros positivos", getRoot());
@@ -392,6 +406,7 @@ public class MenuController implements AtualizarJsonListener {
             // Mensagem de sucesso
             PopupUtils.showSuccessPopup("Sucesso", "Personagem removido com sucesso!", getRoot());
 
+            // cancela edição
             cancelarEdicao();
 
         } catch (Exception e) {
@@ -458,72 +473,57 @@ public class MenuController implements AtualizarJsonListener {
 
     // Method para gravar/atualizar personagens
     @FXML
-    public void gravarPersonagem(Personagem personagem, List<Personagem> lista, ListView<Personagem> listView) {
+    public void gravarPersonagem(ListView<Personagem> listView) {
         try {
-            // personagem selecionado na list View
-            personagem = listView.getSelectionModel().getSelectedItem();
+            selecionado = listView.getSelectionModel().getSelectedItem();
 
             if (selecionado == null) {
                 PopupUtils.showErrorPopup("Erro", "Nenhum personagem selecionado!", getRoot());
                 return;
             }
-            Personagem personagemAtualizado = selecionado;
 
+            // Atualiza dados do personagem com os campos da UI
             if (selecionado instanceof Heroi) {
+                Heroi heroi = (Heroi) selecionado;
+                heroi.setTipo(cbbTipoJogador1.getValue());
+                heroi.setNome(txtNomeJogador1.getText());
+                heroi.setVida(Integer.parseInt(txtVidaJogador1.getText()));
+                heroi.setArmadura(Integer.parseInt(txtArmaduraJogador1.getText()));
+                heroi.setAtaque(Integer.parseInt(txtAtaqueJogador1.getText()));
 
-                personagemAtualizado = new Heroi();
-                Tipo tipo = cbbTipoJogador1.getValue();
-                String nome = txtNomeJogador1.getText();
-                Integer vida = Integer.valueOf(txtVidaJogador1.getText());
-                Integer armadura = Integer.valueOf(txtArmaduraJogador1.getText());
-                Integer ataque = Integer.valueOf(txtAtaqueJogador1.getText());
+                // Atualiza na lista do manager (substitui o objeto pelo atualizado)
+                manager.atualizarHeroi(heroi);
 
-                // Modifica o personagem existente
-                selecionado.setTipo(tipo);
-                selecionado.setNome(nome);
-                selecionado.setVida(vida);
-                selecionado.setArmadura(armadura);
-                selecionado.setAtaque(ataque);
-
-                // usa o manager para atualizar o Herói
-                manager.atualizarHeroi((Heroi) selecionado);
+                // Atualiza observable list para refletir na UI
+                ObservableList<Personagem> obsHerois = listViewHerois.getItems();
+                int idx = obsHerois.indexOf(heroi);
+                if (idx >= 0) obsHerois.set(idx, heroi);
 
             } else if (selecionado instanceof Besta) {
+                Besta besta = (Besta) selecionado;
+                besta.setTipo(cbbTipoJogador2.getValue());
+                besta.setNome(txtNomeJogador2.getText());
+                besta.setVida(Integer.parseInt(txtVidaJogador2.getText()));
+                besta.setArmadura(Integer.parseInt(txtArmaduraJogador2.getText()));
+                besta.setAtaque(Integer.parseInt(txtAtaqueJogador2.getText()));
 
-                personagemAtualizado = new Besta();
-                Tipo tipo = cbbTipoJogador2.getValue();
-                String nome = txtNomeJogador2.getText();
-                Integer vida = Integer.valueOf(txtVidaJogador2.getText());
-                Integer armadura = Integer.valueOf(txtArmaduraJogador2.getText());
-                Integer ataque = Integer.valueOf(txtAtaqueJogador2.getText());
+                manager.atualizarBesta(besta);
 
-                // Modifica o personagem existente
-                selecionado.setTipo(tipo);
-                selecionado.setNome(nome);
-                selecionado.setVida(vida);
-                selecionado.setArmadura(armadura);
-                selecionado.setAtaque(ataque);
-
-                // usa o manager para atualizar o Herói
-                manager.atualizarBesta((Besta) selecionado);
+                ObservableList<Personagem> obsBestas = listViewBestas.getItems();
+                int idx = obsBestas.indexOf(besta);
+                if (idx >= 0) obsBestas.set(idx, besta);
             }
 
-            // Verifique se o personagem foi preenchido corretamente
             if (!ValidationUtils.validarPersonagem(selecionado)) {
                 PopupUtils.showErrorPopup("Erro", "Campos do Personagem não preenchidos corretamente.", getRoot());
                 return;
             }
 
-            // Atualizar a ListView
-            listView.refresh();
-
-            // Salvar os dados
             manager.salvarTodos();
 
-            // Mensagem de sucesso
             PopupUtils.showSuccessPopup("Sucesso", "Personagem atualizado com sucesso!", getRoot());
 
-            // Sair do modo edição
+            // cancela edição
             cancelarEdicao();
 
         } catch (Exception e) {
