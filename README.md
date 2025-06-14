@@ -9,10 +9,8 @@ The Lord Of The Rings é uma aplicação desktop desenvolvida em Java utilizando
 
 O objetivo do projeto é oferecer uma aplicação didática e funcional que demonstra a integração entre JavaFX e Spring Boot, aplicando conceitos de persistência, injeção de dependências, e arquitetura em camadas.
 
-Pequena implementação de um jogo de batalhas de exercito, base turnos, onde foram aplicados conceitos OOP, em Maven, utilização de Javafx para UI, Json para guardar a base de dados dos Personagens, podendo assim criar, remover e alterar personagens.
-
-
 <p align="center">
   <img src="src/Sreenshots/rings.gif" alt="MainAOO" />
 </p>
 
+Pequena implementação de um jogo de batalhas de exercito, base turnos, onde foram aplicados conceitos OOP, em Maven, utilização de Javafx para UI, Json para guardar a base de dados dos Personagens, podendo assim criar, remover e alterar personagens.
